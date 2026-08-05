@@ -1,0 +1,1 @@
+## An AI-powered career assistant that helps candidates discover jobs, analyze job fit using RAG, tailor resumes, and manage their application pipeline. ##
