@@ -115,6 +115,128 @@ Save Profile
 
 </form>
 
+<hr class="my-5">
+
+
+<h3>
+    Skills
+</h3>
+
+
+
+<table class="table">
+
+
+<tr>
+
+<th>
+Skill
+</th>
+
+<th>
+Level
+</th>
+
+</tr>
+
+
+{% for skill in skills %}
+
+
+<tr>
+
+<td>
+{{ skill.skill_name }}
+</td>
+
+
+<td>
+{{ skill.skill_level }}
+</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+</table>
+
+
+
+
+
+<h4 class="mt-4">
+Add Skill
+</h4>
+
+
+<form method="POST" action="/add-skill">
+
+
+<div class="mb-3">
+
+
+<label>
+Skill Name
+</label>
+
+
+<input
+type="text"
+name="skill_name"
+class="form-control"
+placeholder="Python">
+
+
+</div>
+
+
+
+<div class="mb-3">
+
+
+<label>
+Skill Level
+</label>
+
+
+<select
+name="skill_level"
+class="form-control">
+
+
+<option>
+Beginner
+</option>
+
+
+<option>
+Intermediate
+</option>
+
+
+<option>
+Advanced
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+<button class="btn btn-success">
+
+Add Skill
+
+</button>
+
+
+</form>
 
 
 {% endblock %}
