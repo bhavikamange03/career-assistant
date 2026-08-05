@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def dashboard():
-    return "Welcome to Career copilot!"
+    return render_template("dashboard.html")
 
 
 if __name__ == "__main__":
