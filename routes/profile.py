@@ -50,7 +50,7 @@ def profile():
 
 
     skills = get_skills(
-        profile_id=1
+        profile_id=4
     )
 
 
@@ -78,7 +78,7 @@ def add_skill():
 
 
     create_skill(
-        profile_id=1,
+        profile_id=4,
         skill_name=skill_name,
         skill_level=skill_level
     )
