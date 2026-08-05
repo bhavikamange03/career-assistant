@@ -6,36 +6,28 @@
 
 <div class="text-center mb-4">
 
-
     <h1>
         Welcome to Career Copilot 🚀
     </h1>
 
-
     <p class="lead">
-
         Your AI-powered career assistant
-
     </p>
 
-
 </div>
-
 
 
 
 <div class="row">
 
 
+    <!-- Profile Card -->
 
     <div class="col-md-3">
 
-
         <div class="card shadow-sm">
 
-
             <div class="card-body text-center">
-
 
                 <h5>
                     Profile
@@ -43,7 +35,17 @@
 
 
                 <p>
-                    Not Completed
+
+                    {% if dashboard.profile_completed %}
+
+                        Completed ✅
+
+                    {% else %}
+
+                        Not Completed
+
+                    {% endif %}
+
                 </p>
 
 
@@ -54,21 +56,18 @@
 
             </div>
 
-
         </div>
-
 
     </div>
 
 
 
 
+    <!-- Resume Card -->
 
     <div class="col-md-3">
 
-
         <div class="card shadow-sm">
-
 
             <div class="card-body text-center">
 
@@ -79,7 +78,17 @@
 
 
                 <p>
-                    Not Uploaded
+
+                    {% if dashboard.resume_uploaded %}
+
+                        Uploaded ✅
+
+                    {% else %}
+
+                        Not Uploaded
+
+                    {% endif %}
+
                 </p>
 
 
@@ -90,21 +99,18 @@
 
             </div>
 
-
         </div>
-
 
     </div>
 
 
 
 
+    <!-- Saved Jobs Card -->
 
     <div class="col-md-3">
 
-
         <div class="card shadow-sm">
-
 
             <div class="card-body text-center">
 
@@ -115,7 +121,7 @@
 
 
                 <p>
-                    0
+                    {{ dashboard.saved_jobs }}
                 </p>
 
 
@@ -126,21 +132,18 @@
 
             </div>
 
-
         </div>
-
 
     </div>
 
 
 
 
+    <!-- Applications Card -->
 
     <div class="col-md-3">
 
-
         <div class="card shadow-sm">
-
 
             <div class="card-body text-center">
 
@@ -151,7 +154,7 @@
 
 
                 <p>
-                    0
+                    {{ dashboard.applications }}
                 </p>
 
 
@@ -162,9 +165,7 @@
 
             </div>
 
-
         </div>
-
 
     </div>
 
@@ -174,18 +175,46 @@
 
 
 
+
 <hr class="my-5">
 
 
 
+
+
 <h3>
-    AI Career Assistant
+    AI Career Assistant 🤖
 </h3>
 
 
 <div class="alert alert-info">
 
-    🤖 Upload your resume and let AI find matching opportunities.
+    Upload your resume and let AI find matching opportunities.
+
+    <br>
+
+    Your AI agent will analyze:
+    
+    <ul class="mt-2">
+
+        <li>
+            Skills and experience
+        </li>
+
+        <li>
+            Job descriptions
+        </li>
+
+        <li>
+            Career preferences
+        </li>
+
+        <li>
+            Application history
+        </li>
+
+    </ul>
+
 
 </div>
 

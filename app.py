@@ -1,11 +1,20 @@
 from flask import Flask, render_template
+from services.dashboard_service import get_dashboard_data
 
 app = Flask(__name__)
 
-
 @app.route("/")
-def dashboard():
-    return render_template("dashboard.html")
+def home():
+
+    user_id = 1
+
+    dashboard = get_dashboard_data(user_id)
+
+
+    return render_template(
+        "dashboard.html",
+        dashboard=dashboard
+    )
 
 
 if __name__ == "__main__":
