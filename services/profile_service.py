@@ -1,5 +1,4 @@
-from database.lakebase import run_write
-from lakebase import run_query
+from database.lakebase import run_write, run_query
 
 def get_profile(user_id):
 
