@@ -1,10 +1,15 @@
 from flask import Blueprint, render_template, request, redirect
 
-import os
+from databricks.sdk import WorkspaceClient
+
+import io
 
 from pypdf import PdfReader
 
-from services.resume_service import save_resume, get_resume
+from services.resume_service import (
+    save_resume,
+    get_resume
+)
 
 
 resume_bp = Blueprint(
@@ -13,8 +18,13 @@ resume_bp = Blueprint(
 )
 
 
-UPLOAD_FOLDER = "/Volumes/career_copilot/documents/resumes"
+w = WorkspaceClient()
 
+
+UPLOAD_FOLDER = (
+    "/Volumes/career_copilot/"
+    "documents/resumes"
+)
 
 
 @resume_bp.route(
@@ -23,44 +33,60 @@ UPLOAD_FOLDER = "/Volumes/career_copilot/documents/resumes"
 )
 def resume():
 
-
     if request.method == "POST":
 
+        file = request.files.get(
+            "resume"
+        )
 
-        file = request.files["resume"]
 
+        if not file or file.filename == "":
 
-        if file.filename == "":
             return "No file selected"
 
 
 
-        file_path = os.path.join(
-            UPLOAD_FOLDER,
-            file.filename
+        # Read uploaded PDF into memory
+
+        file_content = file.read()
+
+
+
+        # Unity Catalog Volume path
+
+        volume_path = (
+            f"{UPLOAD_FOLDER}/"
+            f"{file.filename}"
         )
 
 
-        # Save PDF to Unity Catalog Volume
 
-        file.save(
-            file_path
+        # Upload PDF to Databricks Volume
+
+        w.files.upload(
+            volume_path,
+            file_content,
+            overwrite=True
         )
 
 
-        # Extract text
 
-        reader = PdfReader(
-            file_path
+        # Extract PDF text
+
+        pdf_reader = PdfReader(
+            io.BytesIO(file_content)
         )
 
 
-        text = ""
+        extracted_text = ""
 
 
-        for page in reader.pages:
+        for page in pdf_reader.pages:
 
-            text += page.extract_text() or ""
+            extracted_text += (
+                page.extract_text()
+                or ""
+            )
 
 
 
@@ -68,13 +94,13 @@ def resume():
 
         save_resume(
 
-            profile_id=3,
+            profile_id=4,
 
             file_name=file.filename,
 
-            storage_path=file_path,
+            storage_path=volume_path,
 
-            extracted_text=text
+            extracted_text=extracted_text
 
         )
 
@@ -86,7 +112,7 @@ def resume():
 
 
     resume_data = get_resume(
-        profile_id=3
+        profile_id=4
     )
 
 
