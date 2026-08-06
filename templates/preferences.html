@@ -23,12 +23,9 @@ Preferred Location
 type="text"
 name="preferred_location"
 class="form-control"
+value="{{ preferences[0].preferred_location if preferences else '' }}"
 placeholder="California">
-
-
 </div>
-
-
 
 
 <div class="mb-3">
@@ -37,34 +34,35 @@ placeholder="California">
 Remote Preference
 </label>
 
-
 <select
 name="remote_preference"
 class="form-control">
 
-
-<option>
+<option value="Remote"
+{% if preferences and preferences[0].remote_preference == "Remote" %}
+selected
+{% endif %}>
 Remote
 </option>
 
 
-<option>
+<option value="Hybrid"
+{% if preferences and preferences[0].remote_preference == "Hybrid" %}
+selected
+{% endif %}>
 Hybrid
 </option>
 
 
-<option>
+<option value="On-site"
+{% if preferences and preferences[0].remote_preference == "On-site" %}
+selected
+{% endif %}>
 On-site
 </option>
 
-
 </select>
-
-
 </div>
-
-
-
 
 
 <div class="mb-3">
@@ -75,20 +73,13 @@ Target Salary
 
 
 <input
-
 type="number"
-
 name="target_salary"
-
 class="form-control"
-
+value="{{ preferences[0].target_salary if preferences else '' }}"
 placeholder="150000">
 
-
 </div>
-
-
-
 
 
 <div class="mb-3">
@@ -102,24 +93,28 @@ Job Type
 name="job_type"
 class="form-control">
 
-
-<option>
+<option value="Full-time"
+{% if preferences and preferences[0].job_type == "Full-time" %}
+selected
+{% endif %}>
 Full-time
 </option>
 
-
-<option>
+<option value="Contract"
+{% if preferences and preferences[0].job_type == "Contract" %}
+selected
+{% endif %}>
 Contract
 </option>
 
-
-<option>
+<option value="Part-time"
+{% if preferences and preferences[0].job_type == "Part-time" %}
+selected
+{% endif %}>
 Part-time
 </option>
 
-
 </select>
-
 
 </div>
 
@@ -128,15 +123,14 @@ Part-time
 
 <div class="form-check mb-3">
 
-
 <input
-
 class="form-check-input"
-
 type="checkbox"
-
-name="sponsorship_required">
-
+name="sponsorship_required"
+{% if preferences and preferences[0].sponsorship_required %}
+checked
+{% endif %}
+>
 
 <label>
 

@@ -65,9 +65,11 @@ def profile():
     )
 
     return render_template(
-        "profile.html",
-        profile=profile,
-        skills=skills
+    "profile.html",
+    profile=profile,
+    skills=skills,
+    preferences=preferences,
+    resume=resume
     )
 
 
