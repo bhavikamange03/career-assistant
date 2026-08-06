@@ -1,23 +1,24 @@
 from database.lakebase import run_query, run_write
 
 
-
 def get_preferences(user_id):
 
-    sql = """
+    print("DEBUG preference user_id:", user_id)
 
+    sql = """
     SELECT *
     FROM preferences
     WHERE user_id = %s;
-
     """
 
-    return run_query(
+    result = run_query(
         sql,
         (user_id,)
     )
 
+    print("DEBUG preference result:", result)
 
+    return result
 
 
 def create_or_update_preferences(
