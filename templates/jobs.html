@@ -23,6 +23,21 @@ View Job
 
 <hr>
 
+<form action="/save-job" method="POST">
+
+<input 
+    type="hidden" 
+    name="job_id" 
+    value="{{job.id}}"
+/>
+
+<button type="submit">
+    Save Job
+</button>
+
+</form>
+
+<hr>
 </div>
 
 
