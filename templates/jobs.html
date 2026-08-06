@@ -1,0 +1,29 @@
+<h1>Remote Jobs</h1>
+
+
+{% for job in jobs %}
+
+<div>
+
+<h3>{{job.title}}</h3>
+
+<p>
+Company:
+{{job.company}}
+</p>
+
+<p>
+Location:
+{{job.location}}
+</p>
+
+<a href="{{job.url}}" target="_blank">
+View Job
+</a>
+
+<hr>
+
+</div>
+
+
+{% endfor %}
