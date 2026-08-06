@@ -116,9 +116,9 @@ def preferences():
 
 
             "target_salary":
-            request.form.get(
-                "target_salary"
-            ),
+            int(request.form.get("target_salary"))
+            if request.form.get("target_salary")
+            else None,
 
 
             "job_type":
