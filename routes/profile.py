@@ -7,6 +7,10 @@ from services.skill_service import (
     create_skill
 )
 
+from services.preference_service import (
+    get_preferences,
+    create_or_update_preferences
+)
 
 profile_bp = Blueprint(
     "profile",
@@ -86,4 +90,68 @@ def add_skill():
 
     return redirect(
         "/profile"
+    )
+
+@profile_bp.route(
+    "/preferences",
+    methods=["GET","POST"]
+)
+def preferences():
+    if request.method == "POST":
+
+
+        data = {
+
+
+            "preferred_location":
+            request.form.get(
+                "preferred_location"
+            ),
+
+
+            "remote_preference":
+            request.form.get(
+                "remote_preference"
+            ),
+
+
+            "target_salary":
+            request.form.get(
+                "target_salary"
+            ),
+
+
+            "job_type":
+            request.form.get(
+                "job_type"
+            ),
+
+
+            "sponsorship_required":
+            request.form.get(
+                "sponsorship_required"
+            ) == "on"
+
+        }
+
+
+        create_or_update_preferences(
+            user_id=1,
+            data=data
+        )
+
+
+        return redirect(
+            "/preferences"
+        )
+
+
+    preferences = get_preferences(
+        user_id=1
+    )
+
+
+    return render_template(
+        "preferences.html",
+        preferences=preferences
     )
