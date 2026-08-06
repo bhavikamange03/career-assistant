@@ -1,6 +1,6 @@
 import requests
 
-from lakebase import run_query, run_write
+from database.lakebase import run_query, run_write
 
 
 def fetch_remote_jobs():
