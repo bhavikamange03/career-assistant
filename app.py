@@ -11,7 +11,7 @@ from services.dashboard_service import get_dashboard_data
 app = Flask(__name__)
 app.register_blueprint(profile_bp)
 app.register_blueprint(resume_bp)
-app.regsiter_blueprint(jobs_bp)
+app.register_blueprint(jobs_bp)
 @app.route("/")
 def home():
 
