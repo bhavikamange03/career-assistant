@@ -52,16 +52,19 @@ Upload Resume
 <hr>
 
 
-<h3>
-Current Resume
-</h3>
-
-
 {% if resume %}
 
-<p>
-{{ resume[0].file_name }}
-</p>
+<h3>Current Resume</h3>
+
+<a href="/resume/view/{{ resume[0].id }}" 
+   target="_blank"
+   class="btn btn-primary">
+
+    {{ resume[0].storage_path.split('/')[-1] }}
+
+</a>
+
+{% endif %}
 
 <p>
 Uploaded Successfully ✅

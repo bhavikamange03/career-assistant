@@ -1,4 +1,10 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import (
+    Blueprint,
+    render_template,
+    request,
+    redirect,
+    send_file
+)
 
 from databricks.sdk import WorkspaceClient
 
@@ -8,7 +14,8 @@ from pypdf import PdfReader
 
 from services.resume_service import (
     save_resume,
-    get_resume
+    get_resume,
+    get_resume_by_id
 )
 
 
@@ -18,6 +25,7 @@ resume_bp = Blueprint(
 )
 
 
+# Databricks Workspace client
 w = WorkspaceClient()
 
 
@@ -26,6 +34,44 @@ UPLOAD_FOLDER = (
     "documents/resumes"
 )
 
+
+# ==============================
+# View Existing Resume PDF
+# ==============================
+
+@resume_bp.route(
+    "/resume/view/<int:resume_id>"
+)
+def view_resume(resume_id):
+
+    resume = get_resume_by_id(
+        resume_id
+    )
+
+    if not resume:
+        return "Resume not found", 404
+
+
+    # Download PDF from Unity Catalog Volume
+    response = w.files.download(
+        resume["storage_path"]
+    )
+
+
+    file_bytes = response.contents.read()
+
+
+    return send_file(
+        io.BytesIO(file_bytes),
+        mimetype="application/pdf",
+        download_name=resume["file_name"]
+    )
+
+
+
+# ==============================
+# Resume Upload Page
+# ==============================
 
 @resume_bp.route(
     "/resume",
@@ -41,27 +87,22 @@ def resume():
 
 
         if not file or file.filename == "":
-
             return "No file selected"
 
 
 
-        # Read uploaded PDF into memory
-
+        # Read uploaded PDF
         file_content = file.read()
 
 
 
-        # Unity Catalog Volume path
+        # Save PDF in Databricks Volume
 
         volume_path = (
             f"{UPLOAD_FOLDER}/"
             f"{file.filename}"
         )
 
-
-
-        # Upload PDF to Databricks Volume
 
         w.files.upload(
             volume_path,
@@ -90,7 +131,7 @@ def resume():
 
 
 
-        # Save metadata in Lakebase
+        # Save resume metadata in Lakebase
 
         save_resume(
 
@@ -110,6 +151,8 @@ def resume():
         )
 
 
+
+    # Load existing resume
 
     resume_data = get_resume(
         profile_id=4

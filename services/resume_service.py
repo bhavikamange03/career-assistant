@@ -1,7 +1,21 @@
 from database.lakebase import run_query, run_write
 
 
+def get_resume_by_id(resume_id):
 
+    sql = """
+    SELECT *
+    FROM resumes
+    WHERE id = %s
+    """
+
+    result = run_query(
+        sql,
+        (resume_id,)
+    )
+
+    return result[0]
+    
 def save_resume(
     profile_id,
     file_name,
