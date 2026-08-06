@@ -207,9 +207,15 @@ CREATE TABLE IF NOT EXISTS job_postings (
 
     skills TEXT,
 
+    salary VARCHAR(255),
+
+    employment_type VARCHAR(100),
+
     match_score INTEGER,
 
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- User saved jobs
@@ -222,12 +228,36 @@ CREATE TABLE IF NOT EXISTS saved_jobs (
 
     status VARCHAR(50) DEFAULT 'saved',
 
+    notes TEXT,
+
     saved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_saved_job
         FOREIGN KEY(job_id)
         REFERENCES job_postings(id)
         ON DELETE CASCADE
+);
+CREATE TABLE applications (
+    id SERIAL PRIMARY KEY,
+
+    user_id INTEGER NOT NULL,
+
+    job_id INTEGER NOT NULL,
+
+    status VARCHAR(50)
+        DEFAULT 'applied',
+
+    applied_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    resume_version TEXT,
+
+    cover_letter TEXT,
+
+    interview_notes TEXT,
+
+    FOREIGN KEY(job_id)
+    REFERENCES job_postings(id)
+    ON DELETE CASCADE
 );
 
 -- =========================
