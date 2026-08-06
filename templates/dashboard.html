@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
-
 {% block content %}
-
 
 <div class="text-center mb-4">
 
@@ -17,22 +15,16 @@
 </div>
 
 
-
-<div class="row">
-
+<div class="row g-4">
 
     <!-- Profile Card -->
+    <div class="col-md-4 col-lg-2">
 
-    <div class="col-md-3">
-
-        <div class="card shadow-sm">
+        <div class="card shadow-sm h-100">
 
             <div class="card-body text-center">
 
-                <h5>
-                    Profile
-                </h5>
-
+                <h5>👤 Profile</h5>
 
                 <p>
 
@@ -48,11 +40,9 @@
 
                 </p>
 
-
                 <a href="/profile" class="btn btn-primary">
-                    Complete Profile
+                    View
                 </a>
-
 
             </div>
 
@@ -61,21 +51,14 @@
     </div>
 
 
-
-
     <!-- Resume Card -->
+    <div class="col-md-4 col-lg-2">
 
-    <div class="col-md-3">
-
-        <div class="card shadow-sm">
+        <div class="card shadow-sm h-100">
 
             <div class="card-body text-center">
 
-
-                <h5>
-                    Resume
-                </h5>
-
+                <h5>📄 Resume</h5>
 
                 <p>
 
@@ -91,11 +74,9 @@
 
                 </p>
 
-
                 <a href="/resume" class="btn btn-success">
-                    Upload Resume
+                    Resume
                 </a>
-
 
             </div>
 
@@ -104,31 +85,42 @@
     </div>
 
 
+    <!-- Available Jobs Card -->
+    <div class="col-md-4 col-lg-2">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body text-center">
+
+                <h5>💼 Jobs</h5>
+
+                <h3>{{ dashboard.total_jobs }}</h3>
+
+                <a href="/jobs" class="btn btn-info">
+                    Browse
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
 
 
     <!-- Saved Jobs Card -->
+    <div class="col-md-4 col-lg-3">
 
-    <div class="col-md-3">
-
-        <div class="card shadow-sm">
+        <div class="card shadow-sm h-100">
 
             <div class="card-body text-center">
 
+                <h5>⭐ Saved Jobs</h5>
 
-                <h5>
-                    Saved Jobs
-                </h5>
-
-
-                <p>
-                    {{ dashboard.saved_jobs }}
-                </p>
-
+                <h3>{{ dashboard.saved_jobs }}</h3>
 
                 <a href="/jobs" class="btn btn-warning">
-                    View Jobs
+                    View
                 </a>
-
 
             </div>
 
@@ -137,87 +129,55 @@
     </div>
 
 
-
-
     <!-- Applications Card -->
+    <div class="col-md-4 col-lg-3">
 
-    <div class="col-md-3">
-
-        <div class="card shadow-sm">
+        <div class="card shadow-sm h-100">
 
             <div class="card-body text-center">
 
+                <h5>📬 Applications</h5>
 
-                <h5>
-                    Applications
-                </h5>
-
-
-                <p>
-                    {{ dashboard.applications }}
-                </p>
-
+                <h3>{{ dashboard.applications }}</h3>
 
                 <a href="/applications" class="btn btn-danger">
                     Track
                 </a>
 
-
             </div>
 
         </div>
 
     </div>
 
-
-
 </div>
-
-
 
 
 <hr class="my-5">
 
 
-
-
-
-<h3>
-    AI Career Assistant 🤖
-</h3>
-
-
 <div class="alert alert-info">
 
-    Upload your resume and let AI find matching opportunities.
+    <h4>🤖 AI Career Assistant</h4>
 
-    <br>
+    <p class="mb-2">
+        Upload your resume and let AI help you find the best opportunities.
+    </p>
 
-    Your AI agent will analyze:
-    
-    <ul class="mt-2">
+    <ul class="mb-0">
 
-        <li>
-            Skills and experience
-        </li>
+        <li>Analyze your skills and experience</li>
 
-        <li>
-            Job descriptions
-        </li>
+        <li>Match your profile with relevant jobs</li>
 
-        <li>
-            Career preferences
-        </li>
+        <li>Optimize your resume for each application</li>
 
-        <li>
-            Application history
-        </li>
+        <li>Generate AI-powered cover letters</li>
+
+        <li>Track saved jobs and applications</li>
 
     </ul>
 
-
 </div>
-
-
 
 {% endblock %}

@@ -27,9 +27,17 @@ def get_dashboard_data(user_id):
     )
 
 
+    jobs = run_query(
+        """
+        SELECT COUNT(*) AS count
+        FROM job_postings;
+        """
+    )
+
+
     saved_jobs = run_query(
         """
-        SELECT COUNT(*) as count
+        SELECT COUNT(*) AS count
         FROM saved_jobs
         WHERE user_id = %s;
         """,
@@ -39,7 +47,7 @@ def get_dashboard_data(user_id):
 
     applications = run_query(
         """
-        SELECT COUNT(*) as count
+        SELECT COUNT(*) AS count
         FROM applications
         WHERE user_id = %s;
         """,
@@ -52,6 +60,8 @@ def get_dashboard_data(user_id):
         "profile_completed": len(profile) > 0,
 
         "resume_uploaded": len(resume) > 0,
+
+        "total_jobs": jobs[0]["count"],
 
         "saved_jobs": saved_jobs[0]["count"],
 
