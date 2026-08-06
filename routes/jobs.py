@@ -46,12 +46,14 @@ def save_job():
         %s,
         %s
     )
+    ON CONFLICT (user_id, job_id)
+    DO NOTHING
     """
 
     run_write(
         sql,
         (
-            1,       # temporary user_id for Day 1 MVP
+            1,
             job_id
         )
     )

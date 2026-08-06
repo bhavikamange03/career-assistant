@@ -235,8 +235,12 @@ CREATE TABLE IF NOT EXISTS saved_jobs (
     CONSTRAINT fk_saved_job
         FOREIGN KEY(job_id)
         REFERENCES job_postings(id)
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+
+    CONSTRAINT unique_user_saved_job
+        UNIQUE(user_id, job_id)
 );
+
 CREATE TABLE applications (
     id SERIAL PRIMARY KEY,
 
