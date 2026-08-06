@@ -49,6 +49,8 @@ def save_jobs_to_db(jobs):
         (
             %s,%s,%s,%s,%s,%s
         )
+        ON CONFLICT (external_id)
+        DO NOTHING
         """
 
         run_write(
