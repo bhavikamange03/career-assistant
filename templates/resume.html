@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<h1>
+Upload Resume
+</h1>
+
+
+<form
+method="POST"
+enctype="multipart/form-data"
+>
+
+
+<div class="mb-3">
+
+<label>
+Choose PDF
+</label>
+
+
+<input
+
+type="file"
+
+name="resume"
+
+class="form-control"
+
+accept=".pdf"
+
+>
+
+
+</div>
+
+
+<button class="btn btn-primary">
+
+Upload Resume
+
+</button>
+
+
+</form>
+
+
+
+<hr>
+
+
+<h3>
+Current Resume
+</h3>
+
+
+{% if resume %}
+
+<p>
+{{ resume[0].file_name }}
+</p>
+
+<p>
+Uploaded Successfully ✅
+</p>
+
+
+{% else %}
+
+<p>
+No resume uploaded yet.
+</p>
+
+
+{% endif %}
+
+
+
+{% endblock %}
