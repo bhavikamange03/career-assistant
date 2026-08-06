@@ -21,6 +21,7 @@ First Name
 <input 
 type="text"
 name="first_name"
+value = "{{profile.first_name if profile else ''}}"
 class="form-control">
 
 </div>
@@ -36,6 +37,7 @@ Last Name
 <input 
 type="text"
 name="last_name"
+value = "{{profile.last_name if profile else ''}}"
 class="form-control">
 
 </div>
@@ -51,6 +53,7 @@ Location
 <input 
 type="text"
 name="location"
+value = "{{profile.location if profile else ''}}"
 class="form-control">
 
 </div>
@@ -68,6 +71,7 @@ Target Role
 type="text"
 name="target_role"
 class="form-control"
+value = "{{profile.target_role if profile else ''}}"
 placeholder="AI Engineer">
 
 </div>
@@ -84,6 +88,7 @@ Years Experience
 <input 
 type="number"
 name="years_experience"
+value = "{{profile.years_experience if profile else ''}}"
 class="form-control">
 
 </div>
@@ -99,7 +104,7 @@ Professional Summary
 <textarea
 name="summary"
 class="form-control"
-rows="4">
+rows="4">{{profile.summary if profile else ''}}
 </textarea>
 
 </div>

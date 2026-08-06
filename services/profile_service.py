@@ -1,7 +1,25 @@
 from database.lakebase import run_write
 
 
+def get_profile(user_id):
 
+    sql = """
+    SELECT *
+    FROM profiles
+    WHERE user_id = %s
+    LIMIT 1
+    """
+
+    result = run_query(
+        sql,
+        (user_id,)
+    )
+
+    if result:
+        return result[0]
+
+    return None
+    
 def create_profile(user_id, data):
 
 

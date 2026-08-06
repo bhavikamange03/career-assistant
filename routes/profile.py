@@ -1,6 +1,9 @@
 from flask import Blueprint, render_template, request, redirect
 
-from services.profile_service import create_profile
+from services.profile_service import (
+    create_profile,
+    get_profile
+)
 
 from services.skill_service import (
     get_skills,
@@ -57,12 +60,15 @@ def profile():
         profile_id=4
     )
 
+    profile = get_profile(
+        user_id=1
+    )
 
     return render_template(
         "profile.html",
+        profile=profile,
         skills=skills
     )
-
 
 
 @profile_bp.route(
