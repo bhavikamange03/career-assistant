@@ -1,5 +1,5 @@
 from database.lakebase import run_write
-
+from lakebase import run_query
 
 def get_profile(user_id):
 
@@ -19,7 +19,7 @@ def get_profile(user_id):
         return result[0]
 
     return None
-    
+
 def create_profile(user_id, data):
 
 
