@@ -188,6 +188,47 @@ CREATE TABLE IF NOT EXISTS interview_notes (
 
 );
 
+-- Job postings fetched from external APIs
+CREATE TABLE IF NOT EXISTS job_postings (
+    id SERIAL PRIMARY KEY,
+
+    external_id VARCHAR(255) UNIQUE NOT NULL,
+
+    title VARCHAR(255) NOT NULL,
+    company VARCHAR(255),
+
+    location VARCHAR(255),
+
+    description TEXT,
+
+    url TEXT,
+
+    source VARCHAR(50) DEFAULT 'RemoteOK',
+
+    skills TEXT,
+
+    match_score INTEGER,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- User saved jobs
+CREATE TABLE IF NOT EXISTS saved_jobs (
+    id SERIAL PRIMARY KEY,
+
+    user_id INTEGER NOT NULL,
+
+    job_id INTEGER NOT NULL,
+
+    status VARCHAR(50) DEFAULT 'saved',
+
+    saved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_saved_job
+        FOREIGN KEY(job_id)
+        REFERENCES job_postings(id)
+        ON DELETE CASCADE
+);
 
 -- =========================
 -- INDEXES
